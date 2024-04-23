@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Add/Edit Word Pair</h1>
+<div mat-dialog-content>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Deutsch</mat-label>
+    <input matInput placeholder="Deutsch">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Englisch</mat-label>
+    <input matInput placeholder="English">
+  </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+
+  <button mat-button (click)="onClose()">Cancel</button>
+  <button mat-button (click)="onSave()">Save</button>
+</div>

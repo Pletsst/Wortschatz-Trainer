@@ -1,0 +1,38 @@
+<div>
+    <h2>Trainieren</h2>
+
+    
+    <button mat-raised-button color="accent" (click)="sortByGerman()">Nach Deutsch Sortieren</button>
+    <button mat-raised-button color="accent" (click)="sortByEnglish()">Nach Englisch Sortieren</button>
+    <button mat-raised-button color="accent" (click)="fillWithExampleWords()">BeispielDaten</button>
+    <button mat-raised-button color="accent" (click)="resetWordList()">Zurücksetzen</button>
+    <button mat-raised-button color="accent" (click)="openWordDialog()">Hinzufügen</button>
+    
+
+
+
+    <table mat-table [dataSource]="wordList" class="mat-elevation-z8">
+        <!-- No. Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let wordPair; let i = index"> {{ i + 1 }} </td>
+        </ng-container>
+    
+        <!-- Deutsch Column -->
+        <ng-container matColumnDef="deutsch">
+          <th mat-header-cell *matHeaderCellDef> Deutsch </th>
+          <td mat-cell *matCellDef="let wordPair"> {{ wordPair.wordDE }} </td>
+        </ng-container>
+    
+        <!-- Englisch Column -->
+        <ng-container matColumnDef="englisch">
+          <th mat-header-cell *matHeaderCellDef> Englisch </th>
+          <td mat-cell *matCellDef="let wordPair"> {{ wordPair.wordEN }} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="['position', 'deutsch', 'englisch']"></tr>
+        <tr mat-row *matRowDef="let wordPair; columns: ['position', 'deutsch', 'englisch'];"></tr>
+      </table>
+  
+  </div>
+  
