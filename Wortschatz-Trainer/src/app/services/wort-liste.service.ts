@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WordPair } from '../types/word-pair';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,32 +10,38 @@ export class WordListService {
 
   constructor() { }
 
-
   resetWordList(): WordPair[] {
     this.wordList = [];
     return this.wordList;
+  }
+
+  gotWordsForTest(): boolean{
+    if(this.wordList.length > 0) return true;
+    return false;
   }
 
   getWordList(): WordPair[] {
     return this.wordList;
   }
 
-  addWordPair(wordDE: string, wordEN: string): WordPair[]{
-    this.wordList.push({wordDE, wordEN, id: this.generateUniqueId()})
+  addWordPair(wordDE: string, wordEN: string): WordPair[] {
+    const newWordPair = { wordDE, wordEN, id: this.generateUniqueId() };
+    this.wordList = this.wordList.concat(newWordPair);
     return this.wordList;
   }
 
-  editWordPair(newWordDE: string, newWordEN: string, id: number){
-    this.wordList.forEach( (pair) => {
-      if (pair.id === id){
-       pair.wordDE = newWordDE;
-       pair.wordEN = newWordEN;
-        }
-      })
+  editWordPair(newWordDE: string, newWordEN: string, id: number) {
+    this.wordList.forEach((pair) => {
+      if (pair.id === id) {
+        pair.wordDE = newWordDE;
+        pair.wordEN = newWordEN;
+      }
+    })
   }
 
-  deleteWordPair(id: number){
-    this.wordList = this.wordList.filter( pair => pair.id !== id )
+  deleteWordPair(id: number): WordPair[] {
+    this.wordList = this.wordList.filter(pair => pair.id !== id);
+    return this.wordList;
   }
 
   sortByGerman(): WordPair[] {
@@ -65,13 +70,13 @@ export class WordListService {
     }
   }
 
-  private generateUniqueId(): number{
+  private generateUniqueId(): number {
     let id = 0;
 
-    this.wordList.forEach(wordPair =>{
-      if(wordPair.id > id) id = wordPair.id
+    this.wordList.forEach(wordPair => {
+      if (wordPair.id > id) id = wordPair.id
     });
-    
+
     return id + 1;
   }
 
@@ -88,7 +93,7 @@ const exampleWordPairs: WordPair[] = [
   { wordDE: 'Fenster', wordEN: 'window', id: 8 },
   { wordDE: 'Hund', wordEN: 'dog', id: 9 },
   { wordDE: 'Katze', wordEN: 'cat', id: 10 },
-  { wordDE: 'Straße', wordEN: 'street', id: 11 },
+  { wordDE: 'Strasse', wordEN: 'street', id: 11 },
   { wordDE: 'Ball', wordEN: 'ball', id: 12 },
   { wordDE: 'Himmel', wordEN: 'sky', id: 13 },
   { wordDE: 'Maus', wordEN: 'mouse', id: 14 },

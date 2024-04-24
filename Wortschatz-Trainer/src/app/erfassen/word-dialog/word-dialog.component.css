@@ -1,0 +1,16 @@
+::ng-deep .mdc-dialog{
+    height: 250px !important;
+    width: 300px;
+    text-align: center;
+}
+
+::ng-deep .mdc-dialog__surface {
+	pointer-events: auto;
+	padding-top: 20px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    margin: 0 60px;
+}

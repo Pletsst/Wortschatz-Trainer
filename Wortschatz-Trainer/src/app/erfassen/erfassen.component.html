@@ -1,38 +1,55 @@
-<div>
-    <h2>Trainieren</h2>
+<div class="wrapper">
 
-    
-    <button mat-raised-button color="accent" (click)="sortByGerman()">Nach Deutsch Sortieren</button>
-    <button mat-raised-button color="accent" (click)="sortByEnglish()">Nach Englisch Sortieren</button>
-    <button mat-raised-button color="accent" (click)="fillWithExampleWords()">BeispielDaten</button>
-    <button mat-raised-button color="accent" (click)="resetWordList()">Zurücksetzen</button>
-    <button mat-raised-button color="accent" (click)="openWordDialog()">Hinzufügen</button>
-    
+  <!--Buttons-->
+  <div class=erfassen-buttons>
 
+    <div class="action-buttons">
+      <button mat-raised-button color="accent" (click)="sortByGerman()">Nach Deutsch Sortieren</button>
+      <button mat-raised-button color="accent" (click)="sortByEnglish()">Nach Englisch Sortieren</button>
+      <button mat-raised-button color="accent" (click)="openWordDialog()">Hinzufügen</button>
+    </div>
 
+    <div class="storage-buttons">
+      <button mat-raised-button color="accent" (click)="fillWithExampleWords()">BeispielDaten</button>
+      <button mat-raised-button color="accent" (click)="saveToLocalStorage()">Daten Speichern</button>
+      <button mat-raised-button color="accent" (click)="loadFromLocalStorage()">Daten Laden</button>
+      <button mat-raised-button color="accent" (click)="resetWordList()">Zurücksetzen</button>
+    </div>
 
-    <table mat-table [dataSource]="wordList" class="mat-elevation-z8">
-        <!-- No. Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let wordPair; let i = index"> {{ i + 1 }} </td>
-        </ng-container>
-    
-        <!-- Deutsch Column -->
-        <ng-container matColumnDef="deutsch">
-          <th mat-header-cell *matHeaderCellDef> Deutsch </th>
-          <td mat-cell *matCellDef="let wordPair"> {{ wordPair.wordDE }} </td>
-        </ng-container>
-    
-        <!-- Englisch Column -->
-        <ng-container matColumnDef="englisch">
-          <th mat-header-cell *matHeaderCellDef> Englisch </th>
-          <td mat-cell *matCellDef="let wordPair"> {{ wordPair.wordEN }} </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="['position', 'deutsch', 'englisch']"></tr>
-        <tr mat-row *matRowDef="let wordPair; columns: ['position', 'deutsch', 'englisch'];"></tr>
-      </table>
-  
   </div>
-  
+
+
+  <!--Table-->
+  <table mat-table [dataSource]="wordList" class="mat-elevation-z8">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let wordPair; let i = index"> {{ i + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deutsch">
+      <th mat-header-cell *matHeaderCellDef> Deutsch </th>
+      <td mat-cell *matCellDef="let wordPair"> {{ wordPair.wordDE }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="englisch">
+      <th mat-header-cell *matHeaderCellDef> Englisch </th>
+      <td mat-cell *matCellDef="let wordPair"> {{ wordPair.wordEN }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Aktionen </th>
+      <td mat-cell *matCellDef="let wordPair">
+        <button mat-icon-button color="warn" (click)="deleteWordPair(wordPair.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="editWordPair(wordPair)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['position', 'deutsch', 'englisch', 'delete']"></tr>
+    <tr mat-row *matRowDef="let wordPair; columns: ['position', 'deutsch', 'englisch', 'delete'];"></tr>
+  </table>
+
+</div>

@@ -1,17 +1,16 @@
-<h1 mat-dialog-title>Add/Edit Word Pair</h1>
 <div mat-dialog-content>
-
   <mat-form-field appearance="outline">
     <mat-label>Deutsch</mat-label>
     <input matInput type="text" [(ngModel)]="editedWord.wordDE">
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Englisch</mat-label>
-    <input matInput placeholder="English">
+    <input matInput [(ngModel)]="editedWord.wordEN">
   </mat-form-field>
-    </div>
-    <div mat-dialog-actions>
-
-  <button mat-button (click)="onClose()">Cancel</button>
-  <button mat-button (click)="onSave()">Save</button>
+</div>
+<div mat-dialog-actions>
+  <div class="buttons">
+    <button mat-raised-button color="accent" (click)="onClose()">Cancel</button>
+    <button mat-raised-button color="accent" (click)="onSave()">Save</button>
+  </div>
 </div>

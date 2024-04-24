@@ -1,1 +1,100 @@
-<p>pruefung works!</p>
+<div *ngIf="wordsFound; else noWords">
+
+    <div class="wrapper">
+
+        <!--Buttons and Timer-->
+        <div class="pruefung-buttons">
+            <button mat-raised-button color="accent" (click)="startTest()" [disabled]="testRunning">Prüfung
+                Starten</button>
+
+            <div *ngIf="testRunning">
+                <div class="timer">
+                    <span>Verbleibende Zeit: {{ timeDisplay }}</span>
+                </div>
+            </div>
+
+            <button mat-raised-button color="warn" (click)="endTest()">Prüfung Abbrechen</button>
+        </div>
+
+
+        <!--Settings-->
+        <div class="test-options" *ngIf="!testRunning">
+            <mat-form-field>
+                <mat-label>Trefferquote (%)</mat-label>
+                <mat-select [(value)]="requiredAccuracy">
+                    <mat-option *ngFor="let accuracy of accuracyOptions" [value]="accuracy">{{ accuracy }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Anzahl der Wörter</mat-label>
+                <mat-select [(value)]="requiredWordCount">
+                    <mat-option *ngFor="let count of wordCountOptions" [value]="count">{{ count }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Zeitbegrenzung (Min)</mat-label>
+                <input matInput type="number" [(ngModel)]="timeLimitMinutes" min="0" max="60" step="1">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Zeitbegrenzung (Sek)</mat-label>
+                <input matInput type="number" [(ngModel)]="timeLimitSeconds" min="0" max="59" step="1">
+            </mat-form-field>
+
+        </div>
+
+        <!--Results-->
+        <div class="results" *ngIf="!testRunning && testResults.length > 0">
+            <h2>Prüfungsergebnis</h2>
+            <p>Trefferquote: {{ testResult.accuracy }}%</p>
+            <p>Anzahl der Wörter: {{ testResult.wordCount }}</p>
+            <p>Richtige Antworten: {{ getTotalCorrectAnswers() }}</p>
+            <ul>
+                <li *ngFor="let result of testResults">
+                    {{ result.word.wordDE }} - {{ result.word.wordEN }}: {{ result.isCorrect ? 'Richtig' : 'Falsch' }}
+                </li>
+            </ul>
+            <p *ngIf="testResult.passed" class="passed">
+                Bestanden!
+            </p>
+            <p *ngIf="!testResult.passed" class="failed">
+                Nicht Bestanden
+            </p>
+        </div>
+
+    </div>
+
+
+
+    <!--Test Cards-->
+    <div *ngIf="testRunning">
+        <mat-card class="test">
+            <mat-card-header>
+                <mat-card-title>
+                    <ng-container *ngIf="isGermanDisplayed; else englishWord">{{ currentWordPair.wordDE
+                        }}</ng-container>
+                    <ng-template #englishWord>{{ currentWordPair.wordEN }}</ng-template>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field appearance="outline">
+                    <mat-label>Antwort</mat-label>
+                    <input matInput type="text" [(ngModel)]="answer" (keyup.enter)="nextWord()">
+                </mat-form-field>
+                <mat-divider></mat-divider>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="accent" (click)="nextWord()">Weiter</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+
+
+</div>
+
+<!--No Words Error-->
+<ng-template #noWords>
+    <p class="error-no-data">Keine Wörter gefunden. Erfasse zuerst Daten in "Erfassen"</p>
+</ng-template>

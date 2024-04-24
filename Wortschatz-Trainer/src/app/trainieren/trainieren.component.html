@@ -1,0 +1,27 @@
+<div *ngIf="currentWordPair; else noWords">
+    <!--Train Cards-->
+    <mat-card class="train">
+      <mat-card-header>
+        <mat-card-title>
+          <ng-container *ngIf="isGermanDisplayed; else englishWord">{{ currentWordPair.wordDE }}</ng-container>
+          <ng-template #englishWord>{{ currentWordPair.wordEN }}</ng-template>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline">
+          <mat-label>Antwort</mat-label>
+          <input matInput type="text" [(ngModel)]="answer" (keyup.enter)="checkAnswer()">
+        </mat-form-field>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="checkAnswer()">Prüfen</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!--No Words Error-->
+  <ng-template #noWords>
+    <p class="error-no-data">Keine Wörter gefunden. Erfasse zuerst Daten in "Erfassen"</p>
+  </ng-template>
+  

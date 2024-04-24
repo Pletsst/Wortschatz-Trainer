@@ -1,0 +1,29 @@
+.erfassen-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .action-buttons {
+    display: flex;
+  }
+  
+  .storage-buttons {
+    display: flex;
+  }
+  
+  .action-buttons button {
+    margin-right: 10px;
+  }
+  
+  .storage-buttons button {
+    margin-left: 10px;
+  }
+  
+  table {
+    box-sizing: border-box;
+  }
+
+  .wrapper{
+    padding: 20px;
+  }

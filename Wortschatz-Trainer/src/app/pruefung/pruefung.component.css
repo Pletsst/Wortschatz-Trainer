@@ -1,0 +1,80 @@
+.error-no-data {
+    text-align: center; 
+    margin-top: 20px;   
+    color: white;
+  }
+
+  .wrapper{
+    max-width: 1136px;
+    margin: 0 auto;
+  }
+
+
+  .pruefung-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px; 
+  }
+
+  .test {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 2rem;
+  }
+
+  .test-options{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px; 
+  }
+
+  .results {
+    background-color: #424242;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    color: white;
+  }
+  
+  .results h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .results p {
+    margin-bottom: 5px;
+  }
+  
+  .results ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .results ul li {
+    margin-bottom: 5px;
+  }
+  
+  .results p.passed {
+    color: rgb(87, 200, 87);
+  }
+  
+  .results p.failed {
+    color: rgb(243, 78, 78);
+  }
+  
+  .mat-mdc-card-title{
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .mdc-card__actions {
+    padding-left: 16px !important;
+  }
+
+  .timer{
+    color: white;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }

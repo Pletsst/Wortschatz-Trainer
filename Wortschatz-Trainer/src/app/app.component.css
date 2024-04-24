@@ -1,0 +1,8 @@
+body{
+    background-color: #353535;    
+}
+
+.mat-toolbar.mat-primary {
+	--mat-toolbar-container-background-color: rgba(198, 69, 217, 0.48);
+	--mat-toolbar-container-text-color: white;
+}

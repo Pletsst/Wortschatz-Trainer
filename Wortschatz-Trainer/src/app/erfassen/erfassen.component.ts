@@ -4,8 +4,6 @@ import { WordListService } from '../services/wort-liste.service';
 import { WordDialogComponent } from './word-dialog/word-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
-
-
 @Component({
   selector: 'app-erfassen',
   templateUrl: './erfassen.component.html',
@@ -18,42 +16,64 @@ export class ErfassenComponent {
   constructor(
     private wordListService: WordListService,
     private dialog: MatDialog
-    ){}
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.wordList = this.wordListService.getWordList();
   }
 
-  sortByGerman(){
+  sortByGerman() {
     this.wordList = this.wordListService.sortByGerman();
   }
 
-  sortByEnglish(){
+  sortByEnglish() {
     this.wordList = this.wordListService.sortByEnglish();
   }
 
-  fillWithExampleWords(){
+  fillWithExampleWords() {
     this.wordList = this.wordListService.useExampleWords();
     console.log(this.wordList)
   }
 
-  addNewWordPair(german: string, english: string){
+  addNewWordPair(german: string, english: string) {
     this.wordList = this.wordListService.addWordPair(german, english);
   }
 
-  resetWordList(){
+  resetWordList() {
     this.wordList = this.wordListService.resetWordList();
   }
 
-  openWordDialog(): void {
+  deleteWordPair(id: number) {
+    this.wordList = this.wordListService.deleteWordPair(id);
+  }
+
+  editWordPair(wordPair: WordPair) {
+    this.openWordDialog(wordPair);
+  }
+
+  saveToLocalStorage(){
+    this.wordListService.saveToLocalStorage();
+  }
+
+  loadFromLocalStorage(){
+    this.wordListService.loadFromLocalStorage();
+    this.wordList = this.wordListService.getWordList();
+  }
+
+  openWordDialog(wordPair?: WordPair): void {
     const dialogRef = this.dialog.open(WordDialogComponent, {
-      width: '400px', 
-      data: {}
+      data: { wordPair }
     });
 
-    // Subscribe to dialog close event to handle data returned from the dialog if needed
     dialogRef.afterClosed().subscribe((result: WordPair) => {
-      this.addNewWordPair(result.wordDE, result.wordEN)
+      if(result){
+        if (!result.id) {
+          console.log(result);
+          this.addNewWordPair(result.wordDE, result.wordEN);
+        } else {
+          this.wordListService.editWordPair(result.wordDE, result.wordEN, result.id);
+        }
+      }
     });
   }
 
