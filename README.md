@@ -2,13 +2,12 @@
 
 #### Installationsanleitung:
 - Git clone main branch
-- In den Wortschatz-Trainer Ordner navigieren
 - `npm install`
 - `ng serve --open`
 
 ---
 
-#### Beschreibung der Applikation:
+#### Aufgabenstellung:
 **Erfassen**
 - Wortpaare alphabetisch sortiert auflisten
 - Wortpaare hinzufügen/bearbeiten/löschen
@@ -39,9 +38,9 @@
 ![Erfassen](screenshots/erfassen.png)
 
 **Trainieren:**
-![Trainieren](screenshots/trainieren.png)
+![Trainieren](screenshots/Trainieren.png)
 
 **Prüfung:**
-![Prüfung](screenshots/pruefung-einstellungen.png)
-![Prüfung](screenshots/pruefung-test.png)
-![Prüfung](screenshots/pruefung-ergebniss.png)
+![Prüfung-Einstellungen](./screenshots/Pruefung-Einstellungen.png)
+![Prüfung-Test](screenshots/Pruefung-Test.png)
+![Prüfung-Ergebniss](screenshots/Pruefung-Ergebniss.png)
