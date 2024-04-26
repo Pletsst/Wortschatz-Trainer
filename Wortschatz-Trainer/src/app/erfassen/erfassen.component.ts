@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ErfassenComponent {
 
   wordList: WordPair[] = [];
+  tableColumnTitles: string[] = ['position', 'deutsch', 'englisch', 'delete'];
 
   constructor(
     private wordListService: WordListService,
@@ -32,7 +33,6 @@ export class ErfassenComponent {
 
   fillWithExampleWords() {
     this.wordList = this.wordListService.useExampleWords();
-    console.log(this.wordList)
   }
 
   addNewWordPair(german: string, english: string) {
@@ -68,7 +68,6 @@ export class ErfassenComponent {
     dialogRef.afterClosed().subscribe((result: WordPair) => {
       if(result){
         if (!result.id) {
-          console.log(result);
           this.addNewWordPair(result.wordDE, result.wordEN);
         } else {
           this.wordListService.editWordPair(result.wordDE, result.wordEN, result.id);

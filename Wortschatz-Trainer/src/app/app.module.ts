@@ -17,6 +17,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select'; 
 import { MatOptionModule } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -40,7 +41,8 @@ import { MatOptionModule } from '@angular/material/core';
     MatDividerModule,
     MatCardModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatMenuModule
   ],
   providers: [
     provideAnimationsAsync('noop')

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" id="toolbar">
     <mat-toolbar-row>
-      <button mat-raised-button color="accent" (click)="navigateTo('/app-erfassen')">Erfassen</button>
-      <button mat-raised-button color="accent" (click)="navigateTo('/app-trainieren')">Trainieren</button>
+      <button mat-raised-button color="accent" routerLink= "/app-erfassen" [disabled]="disableButtonsService.getDisabledStatus()">Erfassen</button>
+      <button mat-raised-button color="accent" routerLink= "/app-trainieren" [disabled]="disableButtonsService.getDisabledStatus()">Trainieren</button>
       <button mat-raised-button color="accent" routerLink="/app-pruefung">Prüfung</button>
     </mat-toolbar-row>
   </mat-toolbar>

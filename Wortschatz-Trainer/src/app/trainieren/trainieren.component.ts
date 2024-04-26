@@ -42,8 +42,7 @@ export class TrainierenComponent implements OnInit {
 
   checkAnswer() {
     const correctAnswer = this.isGermanDisplayed ? this.currentWordPair.wordEN : this.currentWordPair.wordDE;
-    if (this.answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
-    } else {
+    if (this.answer.trim().toLowerCase() !== correctAnswer.trim().toLowerCase()) {
       this.openSnackBar(correctAnswer);
       if (!this.falseAnswers.includes(this.currentWordPair)) {
         this.falseAnswers.push(this.currentWordPair); 

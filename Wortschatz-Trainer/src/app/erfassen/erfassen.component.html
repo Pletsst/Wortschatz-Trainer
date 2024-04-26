@@ -4,16 +4,30 @@
   <div class=erfassen-buttons>
 
     <div class="action-buttons">
-      <button mat-raised-button color="accent" (click)="sortByGerman()">Nach Deutsch Sortieren</button>
-      <button mat-raised-button color="accent" (click)="sortByEnglish()">Nach Englisch Sortieren</button>
-      <button mat-raised-button color="accent" (click)="openWordDialog()">Hinzufügen</button>
+      <button mat-raised-button color="accent" [matMenuTriggerFor]="menu">Sortieren
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="sortByGerman()">Deutsch</button>
+        <button mat-menu-item (click)="sortByEnglish()">Englisch</button>
+      </mat-menu>
+
+      <button mat-raised-button color="accent" (click)="openWordDialog()">
+        Hinzufügen
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 
     <div class="storage-buttons">
+      <button mat-raised-button color="accent" (click)="saveToLocalStorage()">
+        Speichern
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+      <button mat-raised-button color="accent" (click)="loadFromLocalStorage()">Laden
+        <mat-icon>cloud_download</mat-icon>
+      </button>
       <button mat-raised-button color="accent" (click)="fillWithExampleWords()">BeispielDaten</button>
-      <button mat-raised-button color="accent" (click)="saveToLocalStorage()">Daten Speichern</button>
-      <button mat-raised-button color="accent" (click)="loadFromLocalStorage()">Daten Laden</button>
-      <button mat-raised-button color="accent" (click)="resetWordList()">Zurücksetzen</button>
+      <button mat-raised-button color="warn" (click)="resetWordList()">Zurücksetzen</button>
     </div>
 
   </div>
@@ -48,8 +62,8 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['position', 'deutsch', 'englisch', 'delete']"></tr>
-    <tr mat-row *matRowDef="let wordPair; columns: ['position', 'deutsch', 'englisch', 'delete'];"></tr>
+    <tr mat-header-row *matHeaderRowDef="tableColumnTitles"></tr>
+    <tr mat-row *matRowDef="let wordPair; columns: tableColumnTitles;"></tr>
   </table>
 
 </div>

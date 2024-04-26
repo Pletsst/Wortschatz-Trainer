@@ -13,6 +13,7 @@
   .pruefung-buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 20px; 
   }
 
@@ -25,14 +26,15 @@
   .test-options{
     display: flex;
     justify-content: space-between;
-    margin: 20px; 
+    gap: 10px;
+    margin: 20px;
   }
 
   .results {
     background-color: #424242;
     border: 1px solid #ddd;
     padding: 20px;
-    margin-top: 20px;
+    margin: 20px;
     color: white;
   }
   
@@ -55,11 +57,19 @@
   }
   
   .results p.passed {
-    color: rgb(87, 200, 87);
+    color: black;
+    display: inline-block;
+    font-size: large;
+    padding: 5px;
+    background-color: rgb(87, 200, 87);
   }
   
   .results p.failed {
-    color: rgb(243, 78, 78);
+    color: black;
+    display: inline-block;
+    font-size: large;
+    padding: 5px;
+    background-color: rgb(243, 78, 78);
   }
   
   .mat-mdc-card-title{
@@ -73,6 +83,7 @@
 
   .timer{
     color: white;
+    font-size: 32px;
   }
 
   input[type=number] {

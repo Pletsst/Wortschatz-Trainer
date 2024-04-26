@@ -1,4 +1,4 @@
-<div *ngIf="wordsFound; else noWords">
+<div *ngIf="wordListService.gotWordsForTest(); else noWords">
 
     <div class="wrapper">
 
@@ -13,7 +13,9 @@
                 </div>
             </div>
 
-            <button mat-raised-button color="warn" (click)="endTest()">Prüfung Abbrechen</button>
+            <button mat-raised-button color="warn" (click)="endTest()">Prüfung Abbrechen
+                <mat-icon>cancel</mat-icon>
+            </button>
         </div>
 
 

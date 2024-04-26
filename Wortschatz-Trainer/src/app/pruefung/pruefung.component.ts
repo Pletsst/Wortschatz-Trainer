@@ -10,7 +10,6 @@ import { DisableButtonsService } from '../services/disable-buttons.service';
 })
 export class PruefungComponent {
 
-  wordsFound: boolean = false;
   wordList: WordPair[] = [];
   testResults: { word: WordPair, isCorrect: boolean }[] = [];
   testRunning: boolean = false;
@@ -29,14 +28,12 @@ export class PruefungComponent {
   // Timer variables
   timeLimitMinutes: number = 0;
   timeLimitSeconds: number = 0;
-  timeDisplay: any;
+  timeDisplay: any = "∞";
 
   constructor(
-    private wordListService: WordListService,
+    public wordListService: WordListService,
     private disableButtonsService: DisableButtonsService,
-  ) {
-    this.wordsFound = this.wordListService.gotWordsForTest();
-   }
+  ) { }
 
   ngOnInit() {
     this.copyWordList();
@@ -60,7 +57,7 @@ export class PruefungComponent {
   }
 
   endTest() {
-    if(!this.testRunning) return
+    if (!this.testRunning) return
     console.log("Ending Test")
     this.disableButtonsService.toggleDisable();
     this.testRunning = false;
@@ -74,13 +71,13 @@ export class PruefungComponent {
     this.getNextWord()
   }
 
+  // if word left in wordlist and required word count not reached, fetch new word, else end test
   getNextWord() {
     console.log("Fetching Word")
     if (this.wordList && this.wordsTested < this.requiredWordCount) {
-      this.wordsTested ++;
+      this.wordsTested++;
       const randomIndex = Math.floor(Math.random() * this.wordList.length);
-      this.currentWordPair = this.wordList[randomIndex];
-      this.wordList.splice(randomIndex, 1);
+      this.currentWordPair = this.wordList.splice(randomIndex, 1)[0];
       console.table(this.wordList);
     } else {
       this.endTest();
@@ -93,6 +90,7 @@ export class PruefungComponent {
     return false;
   }
 
+  // check answeer and push result to results array, then reset answer to ""
   checkAnswer() {
     const correctAnswer = this.isGermanDisplayed ? this.currentWordPair.wordEN : this.currentWordPair.wordDE;
     if (this.answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
@@ -111,13 +109,17 @@ export class PruefungComponent {
   getAccuracy(): number {
     const totalCorrect = this.getTotalCorrectAnswers();
     const totalQuestions = this.requiredWordCount;
-    return (totalCorrect / totalQuestions) * 100;
+    const accuracy = (totalCorrect / totalQuestions) * 100;
+    return Math.round(accuracy * 100) / 100;
   }
 
 
   // Timer
   startTimer() {
-    if (this.timeLimitMinutes === 0 && this.timeLimitSeconds === 0 || typeof this.timeLimitMinutes !== 'number' || typeof this.timeLimitSeconds !== 'number') return
+    // check if input values are valid
+    if(typeof this.timeLimitMinutes !== 'number') this.timeLimitMinutes = 0;
+    if(typeof this.timeLimitSeconds !== 'number') this.timeLimitSeconds = 0;
+    if (this.timeLimitMinutes === 0 && this.timeLimitSeconds === 0) return
 
     let seconds: number = (this.timeLimitMinutes * 60) + this.timeLimitSeconds;
     let textSec: any = "0";
@@ -125,7 +127,7 @@ export class PruefungComponent {
 
     const prefix = this.timeLimitMinutes < 10 ? "0" : "";
 
-    const timer = setInterval(() => {
+    const tick = () => {
       seconds--;
       if (statSec != 0) statSec--;
       else statSec = 59;
@@ -136,9 +138,18 @@ export class PruefungComponent {
 
       this.timeDisplay = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
       if (seconds == 0) {
-        if (!this.testRunning) this.endTest();
+        if (this.testRunning) this.endTest();
         clearInterval(timer);
+        this.timeDisplay = "∞";
+      }else if (!this.testRunning) {
+        clearInterval(timer);
+        this.timeDisplay = "∞";
+        }
       }
-    }, 1000);
+   
+    tick();
+    const timer = setInterval(tick, 1000);
   }
+
+  
 }
