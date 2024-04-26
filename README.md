@@ -35,7 +35,7 @@
 #### Screenshots:
 
 **Erfassen:**
-![Erfassen](screenshots/erfassen.png)
+![Erfassen](screenshots/Erfassen.png)
 
 **Trainieren:**
 ![Trainieren](screenshots/Trainieren.png)
