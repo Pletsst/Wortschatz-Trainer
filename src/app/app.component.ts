@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DisableButtonsService } from './services/disable-buttons.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,14 @@ import { DisableButtonsService } from './services/disable-buttons.service';
 export class AppComponent {
 
   constructor(
-    public disableButtonsService: DisableButtonsService
+    public disableButtonsService: DisableButtonsService,
+    private router: Router
   ) {}
+
+
+  isRouteDisabled(route: string): boolean {
+    return this.router.url === route;
+  }
 
   title = 'Wortschatz-Trainer';
 }
