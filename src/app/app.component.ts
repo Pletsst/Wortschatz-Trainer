@@ -17,7 +17,7 @@ export class AppComponent {
 
 
   isRouteDisabled(route: string): boolean {
-    return this.router.url === route;
+    return this.router.url === route || this.disableButtonsService.getDisabledStatus();
   }
 
   title = 'Wortschatz-Trainer';
